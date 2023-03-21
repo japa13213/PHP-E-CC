@@ -1,0 +1,94 @@
+<?php
+function linha($semana, $diaAtual)
+{
+    echo "<tr>";
+    for ($i = 0; $i <= 6; $i++) {
+        if (isset($semana[$i])) {
+            if ($semana[$i] == $diaAtual) {
+                echo "<td><b>{$semana[$i]}</b></td>";
+            } elseif ($i == 0) {
+                echo "<td class='domingo'>{$semana[$i]}</td>";
+            } elseif ($i == 6) {
+                echo "<td><b>{$semana[$i]}</b></td>";
+            } else {
+                echo "<td>{$semana[$i]}</td>";
+            }
+        } else {
+            echo "<td></td>";
+        }
+    }
+    echo "</tr>";
+}
+
+function calendario()
+{
+    $anoAtual = date('Y');
+    for ($mes = 1; $mes <= 12; $mes++) {
+        $dia = 1;
+        $semana = array();
+        $diaAtual = date('j'); // Obtém o número do dia atual
+        $primeiroDia = date('N', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número do dia da semana do primeiro dia do mês
+        $diasNoMes = date('t', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número de dias no mês
+        while (count($semana) < $primeiroDia - 1) {
+            array_push($semana, "");
+        }
+        while ($dia <= $diasNoMes) {
+            array_push($semana, $dia);
+            if (count($semana) == 7) {
+                linha($semana, $diaAtual); // Passa o dia atual como parâmetro
+                $semana = array();
+            }
+            $dia++;
+        }
+        linha($semana, $diaAtual); // Imprime a última linha com o dia atual
+    }
+
+}
+
+function saudacao(){
+	date_default_timezone_set('America/Sao_Paulo');
+	$hora = date('H:i');
+	
+	if($hora < '12:00' && $hora >'00:00'){
+	  echo("<H1>Bom dia, agora é:</H1>");
+	}
+	if($hora <'18:00' && $hora >='12:00'){
+	   echo("<H1> Boa tarde </H1>");
+	}
+	if($hora >='18:00'){
+	   echo("<H1>Boa noite</H1>");
+	} echo("<h1>$hora<h1>");
+ } 
+
+ ?>
+
+
+<!DOCTYPE html>
+<html>
+	<head><title>Calendário</title>
+    <style>
+		.domingo {
+			color:red;
+		}
+		b {
+			font-weight: bold;
+		}
+		</style>
+</head>
+<?php saudacao();?>
+<body>
+	<table border="1">
+		<tr>
+		<th>Dom</th>
+		<th>Seg</th>
+		<th>Ter</th>
+		<th>Qua</th>
+		<th>Qui</th>
+		<th>Sex</th>
+		<th>Sáb</th>
+	    </tr>
+		<?php calendario();?>
+	</table>
+	    
+</body>
+</html>
