@@ -1,0 +1,44 @@
+  <?php
+function linha($semana, $diaAtual)
+{
+    echo "<tr>";
+    for ($i = 0; $i <= 6; $i++) {
+        if (isset($semana[$i])) {
+            if ($semana[$i] == $diaAtual) {
+                echo "<td><b>{$semana[$i]}</b></td>";
+            } elseif ($i == 0) {
+                echo "<td class='domingo'>{$semana[$i]}</td>";
+            } elseif ($i == 6) {
+                echo "<td><b>{$semana[$i]}</b></td>";
+            } else {
+                echo "<td>{$semana[$i]}</td>";
+            }
+        } else {
+            echo "<td></td>";
+        }
+    }
+    echo "</tr>";
+}
+
+function calendario()
+{
+    $anoAtual = date('Y');
+    for ($mes = 1; $mes <= 12; $mes++) {
+        $dia = 1;
+        $semana = array();
+        $diaAtual = date('j'); // Obtém o número do dia atual
+        $primeiroDia = date('N', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número do dia da semana do primeiro dia do mês
+        $diasNoMes = date('t', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número de dias no mês
+        while (count($semana) < $primeiroDia - 1) {
+            array_push($semana, "");
+        }
+        while ($dia <= $diasNoMes) {
+            array_push($semana, $dia);
+            if (count($semana) == 7) {
+                linha($semana, $diaAtual); // Passa o dia atual como parâmetro
+                $semana = array();
+            }
+            $dia++;
+        }
+        linha($semana, $diaAtual); // Imprime a última linha com o dia atual
+    }
