@@ -1,4 +1,25 @@
 <?php
+	//DESAFIO 1:
+	date_default_timezone_set('America/Sao_Paulo');
+	echo date('H:i:s');
+	$t = date("H");
+
+	echo "<br>";
+
+	if ($t < "12" && $t> "0") {
+  		echo "Bom dia!";
+	}
+	if ($t > "12" && $t < "18") {
+		echo "Boa tarde!";
+	}
+	else
+		echo "Boa noite";
+
+	 
+	//DESAFIO 1 ATE AQUI
+?>
+
+<?php //DESAFIO 2 A 5:
 function linha($semana, $diaAtual)
 {
     echo "<tr>";
@@ -26,9 +47,16 @@ function calendario()
     for ($mes = 1; $mes <= 12; $mes++) {
         $dia = 1;
         $semana = array();
-        $diaAtual = date('j'); // Obtém o número do dia atual
+        $diaAtual = date('d'); // Obtém o número do dia atual
         $primeiroDia = date('N', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número do dia da semana do primeiro dia do mês
         $diasNoMes = date('t', strtotime($anoAtual.'-'.$mes.'-01')); // Obtém o número de dias no mês
+        
+        // Imprime o nome do mês como cabeçalho
+        echo "<tr><th colspan='7'>" . strftime("%B", strtotime($anoAtual.'-'.$mes.'-01')) . "</th></tr>";
+        
+        // Imprime as iniciais dos dias da semana
+        echo "<tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>";
+        
         while (count($semana) < $primeiroDia - 1) {
             array_push($semana, "");
         }
@@ -42,35 +70,25 @@ function calendario()
         }
         linha($semana, $diaAtual); // Imprime a última linha com o dia atual
     }
-
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
-	<head><title>Calendário</title>
-    <style>
-		.domingo {
-			color:red;
-		}
-		b {
-			font-weight: bold;
-		}
-		</style>
+<head>
+    <title>Calendário</title>
+    <style>   
+        .domingo {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-	<table border="1">
-		<tr>
-		<th>Dom</th>
-		<th>Seg</th>
-		<th>Ter</th>
-		<th>Qua</th>
-		<th>Qui</th>
-		<th>Sex</th>
-		<th>Sáb</th>
-	    </tr>
-		<?php calendario();?>
-	</table>
+    <table border="1">
+        <tr>
+            <th colspan="7">Calendário</th>
+        </tr>
+        <?php calendario(); ?>
+    </table>
 </body>
 </html>
