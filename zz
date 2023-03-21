@@ -1,4 +1,4 @@
-  <?php
+<?php
 function linha($semana, $diaAtual)
 {
     echo "<tr>";
@@ -42,3 +42,35 @@ function calendario()
         }
         linha($semana, $diaAtual); // Imprime a última linha com o dia atual
     }
+
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+	<head><title>Calendário</title>
+    <style>
+		.domingo {
+			color:red;
+		}
+		b {
+			font-weight: bold;
+		}
+		</style>
+</head>
+<body>
+	<table border="1">
+		<tr>
+		<th>Dom</th>
+		<th>Seg</th>
+		<th>Ter</th>
+		<th>Qua</th>
+		<th>Qui</th>
+		<th>Sex</th>
+		<th>Sáb</th>
+	    </tr>
+		<?php calendario();?>
+	</table>
+</body>
+</html>
