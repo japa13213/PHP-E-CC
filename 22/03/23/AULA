@@ -1,5 +1,3 @@
-Cria pasta no HTDOCS, "tarefa". Dentro da pasta cria um tarefas.php.
-
 <html> 
     <head> 
         <title>Gerenciador de Tarefas</title> 
@@ -7,11 +5,14 @@ Cria pasta no HTDOCS, "tarefa". Dentro da pasta cria um tarefas.php.
 <body> 
     <h1>Gerenciador de Tarefas</h1> <!-- Aqui irá o restante do código--> 
     
-    <form> 
+    <form>        <!-- Se tirar, o nome não vai la pra cima "URL" -->
+        
         <fieldset> 
+        
         <legend>Nova tarefa</legend> 
         <label> Cadastre-se: <input type="text" name="nome" /> </label> 
         <input type="submit" value="Cadastrar" /> 
+        
         </fieldset> 
         </form>
 
