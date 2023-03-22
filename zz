@@ -9,7 +9,7 @@
 	if ($t < "12" && $t> "0") {
   		echo "Bom dia!";
 	}
-	if ($t > "12" && $t < "18") {
+	elseif ($t > "12" && $t < "18") {
 		echo "Boa tarde!";
 	}
 	else
